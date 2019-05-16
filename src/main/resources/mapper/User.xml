@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wechat.business.dao.mapper.User" >
+  <resultMap id="BaseResultMap" type="com.wechat.business.entity.User" >
+    <id column="user_id" property="userId" jdbcType="VARCHAR" />
+    <result column="nick_name" property="nickName" jdbcType="VARCHAR" />
+    <result column="avatar_url" property="avatarUrl" jdbcType="VARCHAR" />
+    <result column="gender" property="gender" jdbcType="INTEGER" />
+    <result column="city" property="city" jdbcType="VARCHAR" />
+    <result column="learn_time" property="learnTime" jdbcType="TIME" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    user_id, nick_name, avatar_url, gender, city, learn_time
+  </sql>
+
+
+  <!--根据User实体添加-->
+  <insert id="insertByUser" parameterType="com.wechat.business.entity.User" >
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="nickName != null" >
+        nick_name,
+      </if>
+      <if test="avatarUrl != null" >
+        avatar_url,
+      </if>
+      <if test="gender != null" >
+        gender,
+      </if>
+      <if test="city != null" >
+        city,
+      </if>
+      <if test="learnTime != null" >
+        learn_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="nickName != null" >
+        #{nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="avatarUrl != null" >
+        #{avatarUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null" >
+        #{gender,jdbcType=INTEGER},
+      </if>
+      <if test="city != null" >
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="learnTime != null" >
+        #{learnTime,jdbcType=TIME},
+      </if>
+    </trim>
+  </insert>
+  <!--根据User实体添加-->
+
+
+  <!--根据User实体更新-->
+  <update id="updateByUser" parameterType="com.wechat.business.entity.User" >
+    update user
+    <set>
+      <if test="userId != null" >
+        user_id =  #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="nickName != null" >
+        nick_name  =  #{nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="avatarUrl != null" >
+        avatar_url =  #{avatarUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null" >
+        gender =  #{gender,jdbcType=INTEGER},
+      </if>
+      <if test="city != null" >
+        city =  #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="learnTime != null" >
+        learn_time  #{learnTime,jdbcType=TIME},
+      </if>
+    </set>
+    where user_id = #{userId,jdbcType=VARCHAR}
+  </update>
+  <!--根据User实体更新-->
+
+
+
+  <!--根据User实体单个查询-->
+  <select id="selectByUserone" resultMap="BaseResultMap" parameterType="com.wechat.business.entity.User" >
+    select
+    <include refid="Base_Column_List" />
+    from user
+    <where>
+      <trim suffixOverrides="and|or">
+        <if test="userId != null">
+        AND user_id =   #{userId,jdbcType=VARCHAR}
+        </if>
+        <if test="nickName != null">
+        AND  nick_name = #{nickName,jdbcType=VARCHAR}
+        </if>
+        <if test="avatarUrl != null">
+          AND  avatar_url = #{avatarUrl,jdbcType=VARCHAR}
+        </if>
+        <if test="gender != null">
+          AND gender = #{gender,jdbcType=BIT}
+        </if>
+        <if test="city != null">
+          AND  city = #{city,jdbcType=VARCHAR}
+        </if>
+      </trim>
+    </where>
+  </select>
+  <!--根据User实体单个查询-->
+
+  <!--根据User实体精准查询数量-->
+  <select id="selectCountByUser" resultType="java.lang.Integer"  parameterType="com.wechat.business.entity.User" >
+    select
+    COUNT(*)
+    from user
+    <where>
+      <trim suffixOverrides="and|or">
+        <if test="userId != null">
+          AND user_id =   #{userId,jdbcType=VARCHAR}
+        </if>
+        <if test="nickName != null">
+          AND  nick_name = #{nickName,jdbcType=VARCHAR}
+        </if>
+        <if test="avatarUrl != null">
+          AND  avatar_url = #{avatarUrl,jdbcType=VARCHAR}
+        </if>
+        <if test="gender != null">
+          AND gender = #{gender,jdbcType=BIT}
+        </if>
+        <if test="city != null">
+          AND  city = #{city,jdbcType=VARCHAR}
+        </if>
+      </trim>
+    </where>
+  </select>
+  <!--根据User实体精准查询数量-->
+
+  <!--根据User实体精准查询集合-->
+  <select id="selectByUserList" resultMap="BaseResultMap" parameterType="com.wechat.business.entity.User" >
+    select
+    <include refid="Base_Column_List" />
+    from user
+    <where>
+      <trim suffixOverrides="and|or">
+        <if test="userId != null">
+          AND user_id =   #{userId,jdbcType=VARCHAR}
+        </if>
+        <if test="nickName != null">
+          AND  nick_name = #{nickName,jdbcType=VARCHAR}
+        </if>
+        <if test="avatarUrl != null">
+          AND  avatar_url = #{avatarUrl,jdbcType=VARCHAR}
+        </if>
+        <if test="gender != null">
+          AND gender = #{gender,jdbcType=BIT}
+        </if>
+        <if test="city != null">
+          AND  city = #{city,jdbcType=VARCHAR}
+        </if>
+      </trim>
+    </where>
+    <!-- 分页 -->
+    <if test="pagenumber != -1">
+      limit #{pagenumber,jdbcType=INTEGER},
+      #{pagesize,jdbcType=INTEGER}
+    </if>
+  </select>
+  <!--根据User实体精准查询集合-->
+
+  <!--根据User实体模糊查询数量-->
+  <select id="selectCountBySelectData" resultType="java.lang.Integer"  parameterType="com.wechat.business.entity.User" >
+    select
+    COUNT(*)
+    from user
+    <where>
+      <trim suffixOverrides="and|or">
+        <if test="userId != null">
+          AND user_id =   #{userId,jdbcType=VARCHAR}
+        </if>
+        <if test="nickName != null">
+          AND  nick_name  like CONCAT('%', #{nickName,jdbcType=VARCHAR},%)
+        </if>
+        <if test="avatarUrl != null">
+          AND  avatar_url = #{avatarUrl,jdbcType=VARCHAR}
+        </if>
+        <if test="gender != null">
+          AND gender = #{gender,jdbcType=BIT}
+        </if>
+        <if test="city != null">
+          AND  city  like CONCAT('%', #{city,jdbcType=VARCHAR},%)
+        </if>
+      </trim>
+    </where>
+  </select>
+  <!--根据User实体模糊查询数量-->
+
+  <!--根据User实体模糊查询集合-->
+  <select id="selectBySelectData" resultMap="BaseResultMap" parameterType="com.wechat.business.entity.User" >
+    select
+    <include refid="Base_Column_List" />
+    from user
+    <where>
+      <trim suffixOverrides="and|or">
+        <if test="userId != null">
+          AND user_id =   #{userId,jdbcType=VARCHAR}
+        </if>
+        <if test="nickName != null">
+          AND  nick_name  like CONCAT('%', #{nickName,jdbcType=VARCHAR},%)
+        </if>
+        <if test="avatarUrl != null">
+          AND  avatar_url = #{avatarUrl,jdbcType=VARCHAR}
+        </if>
+        <if test="gender != null">
+          AND gender = #{gender,jdbcType=BIT}
+        </if>
+        <if test="city != null">
+          AND  city  like CONCAT('%', #{city,jdbcType=VARCHAR},%)
+        </if>
+      </trim>
+    </where>
+    <!-- 分页 -->
+    <if test="pagenumber != -1">
+      limit #{pagenumber,jdbcType=INTEGER},
+      #{pagesize,jdbcType=INTEGER}
+    </if>
+  </select>
+  <!--根据User实体模糊查询集合-->
+
+  <!--根据User实体假删除-->
+  <update id="updateByUserDeleteState" parameterType="com.wechat.business.entity.User" >
+    update user
+    <set>
+      <if test="userId != null" >
+        user_id =  #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="nickName != null" >
+        nick_name  =  #{nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="avatarUrl != null" >
+        avatar_url =  #{avatarUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null" >
+        gender =  #{gender,jdbcType=INTEGER},
+      </if>
+      <if test="city != null" >
+        city =  #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="learnTime != null" >
+        learn_time  #{learnTime,jdbcType=TIME},
+      </if>
+    </set>
+    where user_id = #{userId,jdbcType=VARCHAR}
+  </update>
+  <!--根据User实体假删除-->
+
+  <!--根据User实体真删除-->
+  <delete id="deleteByUser" parameterType="com.wechat.business.entity.User" >
+      delete from user
+    where user_id = #{userId,jdbcType=VARCHAR}
+  </delete>
+  <!--根据User实体真删除-->
+
+  <!--根据User实体多条真删除-->
+  <delete id="deleteByidlist" parameterType="java.lang.String" >
+       delete from user
+    where user_id = #{userId,jdbcType=VARCHAR}
+  </delete>
+  <!--根据User实体多条真删除-->
+
+</mapper>
