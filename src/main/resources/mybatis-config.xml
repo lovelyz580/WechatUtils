@@ -8,8 +8,8 @@
 			<dataSource type="com.wechat.mybatis.c3p0.C3P0DataSourceFactory">
 				<property name="driverClass" value="com.mysql.jdbc.Driver" />
 				<property name="jdbcUrl" value="jdbc:mysql://118.89.242.116:3306/redjian?allowMultiQueries=true&amp;useUnicode=true&amp;characterEncoding=UTF-8" />
-				<property name="user" value="redjian" />
-				<property name="password" value="REDjian@2580" />
+				<property name="user" value="*******" />
+				<property name="password" value="*****" />
 				<property name="initialPoolSize" value="3" />
 				<property name="maxPoolSize" value="10" />
 				<property name="minPoolSize" value="3" />
